@@ -8,14 +8,14 @@ const ACTIONS = require('./src/Actions');
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use(express.static('build'));
-app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// Commenting out frontend static serving since frontend is deployed separately
+// app.use(express.static('build'));
+// app.use((req, res, next) => {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 const userSocketMap = {};
 function getAllConnectedClients(roomId) {
-    // Map
     return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map(
         (socketId) => {
             return {
